@@ -13,13 +13,15 @@ router.post(
             .withMessage("Password must be between 4 and 20 characters"),
     ],
     (req: Request, res: Response) => {
+        const { email, password } = req.body;
+
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).send(errors.array());
+            throw new Error("Invalid email or password");
         }
 
-        const { email, password } = req.body;
         console.log("Creating a user ....");
+        throw new Error("Internal Server Error");
 
         res.send({});
     }
